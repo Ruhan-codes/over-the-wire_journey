@@ -4,7 +4,7 @@
 Log in to the Bandit game using SSH and retrieve the password for the next level.
 
 ---
-
+![Bandit Level 09 Screenshot](screenshots/level00.png)
 ### 🔍 Command Used
 ```bash
 ssh bandit0@bandit.labs.overthewire.org -p 2220
