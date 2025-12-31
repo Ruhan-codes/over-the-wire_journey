@@ -42,7 +42,7 @@ So we only need to trigger the push — the response reveals the password.
 ---
 
 ### 📸 Screenshot Placement  
-(Place your screenshot here showing the push output and password)level31.png
+(Place your screenshot here showing the push output and password)(screenshots/level31.png)
 
 ---
 
