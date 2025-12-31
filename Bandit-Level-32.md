@@ -1,52 +1,103 @@
+
 ## Bandit Level 32 → Level 33
 
+
 ### 🎯 Objective  
-Bypass the **uppercase-only restricted shell** and retrieve the password for the next level from  
-`/etc/bandit_pass/bandit33`.
+
+- Log in as `bandit32`  
+- Escape the uppercase-only shell  
+- Launch a normal Bash shell  
+- Retrieve the password for the next level  
+
+
+---
+
+### 🧭 Quick Action Summary  
+
+- Login as `bandit32`  
+- Execute `$0` to escape the restricted shell  
+- Start `bash`  
+- Read the password file  
+
 
 ---
 
 ### 🔑 Credentials Provided  
+
 - **Username:** bandit32  
-- **Password:** From previous level
+- **Password:** 309RfhaqALVBEZpVb6LYStshZoqoSx5K  
+
 
 ---
 
 ### 🔍 Method of Solve  
-1. When logging in, you are placed inside an **uppercase shell** where only uppercase commands are allowed.
-2. Normal lowercase Linux commands such as `ls`, `cat`, `bash`, etc., are blocked.
-3. However, the shell can still execute lowercase binaries if we spawn a normal shell.
-4. The trick is to execute **bash** (which is lowercase) directly, bypassing the uppercase restriction.
-5. Once inside a real shell, simply read the password file.
+
+The `bandit32` account uses a shell that only accepts uppercase input.  
+By executing the `$0` environment variable, the restricted shell is replaced with a normal shell, allowing standard commands to be run.
+
+Steps followed:  
+- Execute `$0`  
+- Start a Bash shell  
+- Read the password file  
+
 
 ---
 
-### 🧪 Commands Used
-```bash
-$ bash
-cat /etc/bandit_pass/bandit33
+### 🧪 Commands Used  
+
+- `$0`  
+- `bash`  
+- `cat /etc/bandit_pass/bandit33`  
+
+
+---
+
+### 🧩 Command Purpose  
+
+| Command | Purpose |
+|--------|--------|
+| `$0` | Spawns a new instance of the current shell |
+| `bash` | Starts a normal Bash shell |
+| `cat bandit33` | Displays the next level password |
+
+
+---
+
+### 📸 Screenshot Evidence  
+
+**Escaping the Uppercase Shell and Reading the Password**  
+![Bandit Level 32 Screenshot](screenshots/level32.png)
+
+
+---
+
+### 🔑 Next Level Password  
+
 ```
+tQdtbs5D5i2vJwk08mEyYETL81z0eJ0
+```
+
 
 ---
 
 ### 🧠 Explanation  
-The provided shell forces uppercase execution and blocks standard commands.  
-However, the system does not restrict **running an interactive bash shell**, which drops you into a normal unrestricted environment.  
-Once inside bash, you can freely execute any commands and access the password file.
+
+- `$0` launches a new shell without the uppercase restriction  
+- `bash` starts a standard interactive shell  
+- The password file is read using `cat`  
+
 
 ---
 
-### 📸 Screenshot Placement  
-(Place screenshot showing the `bash` escape and successful `cat` output)
+### 🔐 Concept Learned  
+
+This level shows how restricted shells can be bypassed.  
+It highlights how environment variables can be leveraged to escape limited environments.
+
 
 ---
 
-### 🔐 Next Level Password  
-`tQdtbs5D5i2vJwkO8mEyYEyTL8izoeJ0`
+### 🛡️ Security Insight  
 
----
-
-### 🧠 Concept Learned  
-- Restricted shells and how to bypass them  
-- Spawning subshells to regain execution freedom  
-- Accessing protected system files once restrictions are bypassed  
+Shell restrictions must be carefully implemented.  
+Weak restrictions can be bypassed using built-in shell features.
