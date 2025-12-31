@@ -1,92 +1,109 @@
+
 ## Bandit Level 24 → Level 25
 
-### 🎯 Objective
-Connect to the daemon running on port 30002, brute-force the correct 4-digit PIN along with the password of bandit24, and retrieve the password for bandit25.
 
-------------------------------------------------------------
+### 🎯 Objective  
 
-### 🔑 Credentials Provided
-Username: bandit24  
-Password: gBkkRRC5shuzXlOtURr6YpOFjIzbf3G8
+- Log in as `bandit24`  
+- Connect to the local authentication service  
+- Brute-force the 4-digit PIN  
+- Retrieve the password for the next level  
 
-------------------------------------------------------------
 
-### 🔍 Method of Solve
-There is a service running on port 30002 which requires:
-- bandit24 password  
-- a valid 4-digit PIN  
+---
 
-Since the PIN is unknown, a Python script is used to brute-force every PIN (0000–9999).  
-Each attempt opens a fresh connection, sends credentials, waits for a response, and stops once “Correct!” is received.
+### 🧭 Quick Action Summary  
 
-------------------------------------------------------------
+- Login as `bandit24`  
+- Write a Python brute-force script  
+- Try all PINs from `0000` to `9999`  
+- Capture the correct response  
+- Extract the password  
 
-### 🧪 Commands / Script Used
-~~~python
-#!/usr/bin/env python3
-import socket
-import sys
 
-def brute_force():
-    password = "gBkkRRC5shuzXlOtURr6YpOFjIzbf3G8"
+---
 
-    for pincode in range(0, 10000):
-        try:
-            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-                s.settimeout(2)
-                s.connect(("127.0.0.1", 30002))
-                s.recv(2048)
+### 🔑 Credentials Provided  
 
-                message = f"{password} {pincode:04d}\n"
-                s.sendall(message.encode())
+- **Username:** bandit24  
+- **Password:** gb8KRRcsshuzXi0tUuR6ypOFjiZbf3G8  
 
-                response = s.recv(1024).decode()
 
-                if "Wrong" not in response:
-                    print(f"\nSuccess! PIN: {pincode:04d}")
-                    print("Response:", response)
-                    return True
+---
 
-        except socket.timeout:
-            continue
-        except Exception as e:
-            print(e)
+### 🔍 Method of Solve  
 
-    return False
+A service running on port `30002` requires the current password and a 4-digit PIN.  
+Because the PIN space is small, it can be brute-forced by testing every possible combination.
 
-if __name__ == "__main__":
-    if brute_force():
-        sys.exit(0)
-    else:
-        print("Failed")
-        sys.exit(1)
-~~~
+Steps followed:  
+- Create a Python script  
+- Connect to the service repeatedly  
+- Send each PIN with the password  
+- Detect the correct response  
 
-------------------------------------------------------------
 
-### 📸 Screenshot
-Place screenshot here:
-`![Bandit24 Screenshot](screenshots/level24.png)`
+---
 
-------------------------------------------------------------
+### 🧪 Commands Used  
 
-### 🧠 Explanation
-- The script iterates from `0000` → `9999`
-- Creates a new socket for every attempt
-- Sends: `<bandit24 password> <PIN>`
-- Reads server output
-- Stops when the server replies with “Correct!”
-- Output contains the **bandit25 password**
+- `cd /tmp/ak`  
+- `ls -la`  
+- `nano ...ak.py`  
+- `python3 ...ak.py`  
 
-------------------------------------------------------------
 
-### 🔐 Concept Learned
-- Brute-force automation
-- Python socket programming
-- Timeout handling
-- Authentication logic understanding
+---
 
-------------------------------------------------------------
+### 🧩 Command Purpose  
 
-### 🔑 Next Level Password
-iCi86ttt4KSNe1armKiwbQNmB3YJP3q4
+| Command | Purpose |
+|--------|--------|
+| `nano ...ak.py` | Creates the brute-force Python script |
+| `python3 ...ak.py` | Executes the brute-force attack |
+
+
+---
+
+### 📸 Screenshot Evidence  
+
+**Step 1 – Creating the Python Brute-Force Script**  
+![Bandit Level 24 – Python Script](screenshots/level24_1.png)
+
+**Step 2 – Successful PIN Brute-Force and Password Retrieval**  
+![Bandit Level 24 – Password Found](screenshots/level24_2.png)
+
+
+---
+
+### 🔑 Next Level Password  
+
+```
+iCi86ttT4KSNe1armKiwbQNmB3YJP3q4
+```
+
+
+---
+
+### 🧠 Explanation  
+
+- The script connects to the service on port `30002`  
+- Each 4-digit PIN is sent with the current password  
+- When the correct PIN is found, the service returns the password  
+- The script captures and prints the result  
+
+
+---
+
+### 🔐 Concept Learned  
+
+This level demonstrates how small key spaces can be brute-forced.  
+It highlights the risks of weak authentication mechanisms.
+
+
+---
+
+### 🛡️ Security Insight  
+
+Services must implement rate-limiting and lockouts.  
+Without these, brute-force attacks can easily compromise accounts.
