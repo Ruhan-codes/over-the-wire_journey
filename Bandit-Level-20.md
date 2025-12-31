@@ -1,48 +1,101 @@
+
 ## Bandit Level 20 → Level 21
 
-### 🎯 Objective
-Use the `suconnect` SUID binary to send the current level password to a listening localhost port. If correct, receive the password for the next level.
+
+### 🎯 Objective  
+
+- Log in as `bandit20`  
+- Run the set-UID network program  
+- Capture the transmitted password  
+- Retrieve the password for the next level  
+
 
 ---
 
-### 🔑 Credentials Provided
-Username: bandit20  
-Password: 0qXahG8Zj0VMN9Ghs7iOWsCfZyXOUbY0  
+### 🧭 Quick Action Summary  
+
+- Login as `bandit20`  
+- Start a Netcat listener  
+- Run `suconnect` to send the password  
+- Capture the output  
+
 
 ---
 
-### 🔍 Method of Solve
-1. Choose a port number (example: 5000).
-2. Start a Netcat listener on that port.
-3. Run the `suconnect` program with the same port.
-4. When the connection happens, `suconnect` sends the password, verifies it, and returns the next level password.
+### 🔑 Credentials Provided  
+
+- **Username:** bandit20  
+- **Password:** oqXahG8ZjOVMN9Ghs710WsCfZyXOUbY0  
+
 
 ---
 
-### 🧪 Commands Used
-nc -lvp 5000
-./suconnect 5000
+### 🔍 Method of Solve  
+
+A set-UID program named `suconnect` runs with `bandit21` privileges.  
+It sends the next level password to a service listening on a specified port.
+
+Steps followed:  
+- Start a Netcat listener on a chosen port  
+- Run `suconnect` to connect to that port  
+- Capture the transmitted password  
+
 
 ---
 
-### 📸 Screenshot
-(Place Screenshot Here)
+### 🧪 Commands Used  
+
+- `nc -lvp 5000`  
+- `./suconnect 5000`  
+
 
 ---
 
-### 🔑 Next Level Password
-EeoULMCra2q0qDsKyj5l6lDX7s1CpBuOBt
+### 🧩 Command Purpose  
+
+| Command | Purpose |
+|--------|--------|
+| `nc -lvp 5000` | Starts a Netcat listener on port 5000 |
+| `./suconnect 5000` | Sends the password to the specified port |
+
 
 ---
 
-### 🧠 Explanation
-- `nc -lvp 5000` opens a listening TCP port.
-- `./suconnect 5000` is a SUID-root helper tool that connects to that port and sends the current password.
-- Once validated, Bandit21 password is returned through the connection.
+### 📸 Screenshot Evidence  
+
+![Bandit Level 20 Screenshot](screenshots/level20.png)
+
 
 ---
 
-### 🔐 Concept Learned
-- Working with SUID binaries
-- TCP communication using Netcat
-- Local privilege and password transfer concepts
+### 🔑 Next Level Password  
+
+```
+Ee0ULMCrq2q0dSKYj561DX7s1CpBuOBt
+```
+
+
+---
+
+### 🧠 Explanation  
+
+- Netcat waits for incoming connections on port 5000  
+- The `suconnect` program connects to that port  
+- The program sends the next level password  
+- The password is displayed in the Netcat listener  
+
+
+---
+
+### 🔐 Concept Learned  
+
+This level demonstrates how privileged network programs can transmit sensitive data.  
+It highlights how listening on the correct port can capture that information.
+
+
+---
+
+### 🛡️ Security Insight  
+
+Network services running with elevated privileges must be secured.  
+Otherwise, attackers can intercept sensitive data by listening on exposed ports.
