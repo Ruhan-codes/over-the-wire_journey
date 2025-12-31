@@ -1,55 +1,100 @@
+
 ## Bandit Level 17 → Level 18
 
-### 🎯 Objective
-Log in as bandit17 and obtain the password for bandit18 by identifying the difference between two password files.
+
+### 🎯 Objective  
+
+- Log in as `bandit17`  
+- Locate the password files  
+- Compare the old and new versions  
+- Retrieve the password for the next level  
+
 
 ---
 
-### 🔑 Credentials Provided
+### 🧭 Quick Action Summary  
+
+- Login as `bandit17`  
+- Identify `passwords.new` and `passwords.old`  
+- Compare both files  
+- Extract the new password  
+
+
+---
+
+### 🔑 Credentials Provided  
+
 - **Username:** bandit17  
-- **Authentication:** SSH Private Key from previous level
+- **Password:** EReVavePLFHTflsjnhyZmIvsuSaCRD  
+
 
 ---
 
-### 🔍 Method of Solve
-Inside the home directory, two files are available:  
-- `passwords.old`
-- `passwords.new`
+### 🔍 Method of Solve  
 
-Only **one line** differs between them.  
-The line present in `passwords.new` but not in `passwords.old` contains the password for the next level.
+Two files contain different versions of password data.  
+By comparing them, the newly added password can be identified.
 
-We use the `diff` command to compare both files and extract the changed line.
+Steps followed:  
+- List all files  
+- Compare the two password files  
+- Identify the new entry  
 
----
-
-### 🧪 Commands Used
-- `ls`
-  Lists available files
-
-- `diff passwords.new passwords.old`
-  Compares both files and displays the difference
 
 ---
 
-### 🖼 Screenshot
+### 🧪 Commands Used  
+
+- `ls`  
+- `diff passwords.new passwords.old`  
+
+
+---
+
+### 🧩 Command Purpose  
+
+| Command | Purpose |
+|--------|--------|
+| `ls` | Lists files in the current directory |
+| `diff passwords.new passwords.old` | Shows differences between two files |
+
+
+---
+
+### 📸 Screenshot Evidence  
+
 ![Bandit Level 17 Screenshot](screenshots/level17.png)
 
----
-
-### 🔑 Next Level Password
-`x2gLTTjFwMOhQ80WNbMN362QKxfRqcGLo`
 
 ---
 
-### 🧠 Explanation
-The `diff` command compares files line by line.  
-The output indicates which line differs.  
-The highlighted line from `passwords.new` is the valid password for the next level.
+### 🔑 Next Level Password  
+
+```
+x2gLTTjFwMOHQ80WNbMN36ZQKxFrQGIO
+```
+
 
 ---
 
-### 🔐 Concept Learned
-- File comparison using `diff`
-- Understanding file difference indicators
-- Identifying modified data between versions
+### 🧠 Explanation  
+
+- The `diff` command highlights lines that differ between the two files  
+- Lines present only in `passwords.new` represent newly added entries  
+- The new entry is the password for the next level  
+
+
+---
+
+### 🔐 Concept Learned  
+
+This level demonstrates how file comparison can be used to track changes.  
+It shows how identifying differences is useful in system auditing and security analysis.
+
+
+---
+
+### 🛡️ Security Insight  
+
+Password changes should be carefully tracked and protected.  
+Unauthorized access to versioned files can expose sensitive credentials.
