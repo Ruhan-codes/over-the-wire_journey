@@ -1,34 +1,108 @@
+
 ## Bandit Level 28 → Level 29
 
-### 🎯 Objective
-Access the git repository for bandit28, investigate its commit history, and recover the password for bandit29.
 
-### 🔑 Credentials Provided
-Username: bandit28  
-Password: (from previous level)
+### 🎯 Objective  
 
-### 🔍 Method of Solve
-After cloning the remote git repository, the README file appears to have the password removed.  
-To retrieve earlier versions of the README, inspect the git commit history and view differences between commits to reveal the password before it was redacted.
+- Log in as `bandit28-git`  
+- Access the private Git repository  
+- Review the commit history  
+- Retrieve the password for the next level  
 
-### 🧪 Commands Used
-git clone ssh://bandit28-git@bandit.labs.overthewire.org:2220/home/bandit28-git/repo  
-cd repo  
-ls  
-cat README.md  
-git log -p  
 
-### 🧠 Explanation
-1. The repository is cloned using SSH with the bandit28 credentials.  
-2. Opening README.md shows that the password field is hidden.  
-3. `git log -p` is used to display commit history along with patches showing what changed in each version.  
-4. Scanning through earlier commits reveals the password before it was censored.
+---
 
-### 📌 Password to the Next Level
-4pt1t5DEnaYuqnqvaYsl0e4QLcdjm7J
+### 🧭 Quick Action Summary  
 
-### 🔐 Concept Learned
-This level teaches:
-- Basic Git usage in security contexts  
-- How sensitive information can still be retrieved from commit history  
-- Importance of cleaning repository history to prevent leaks
+- Connect to the Git repository over SSH  
+- Clone the repository  
+- Inspect the commit history  
+- Locate the removed password  
+- Extract the password  
+
+
+---
+
+### 🔑 Credentials Provided  
+
+- **Username:** bandit28-git  
+- **Password:** YZ9IpL0sBcCeuG7m9uQFt8ZnpS4HZRcN  
+
+
+---
+
+### 🔍 Method of Solve  
+
+The current version of the repository no longer contains the password.  
+However, Git preserves previous versions in its commit history, which can be examined to recover the deleted data.
+
+Steps followed:  
+- Clone the private repository  
+- View the commit history  
+- Inspect earlier file versions  
+- Identify the password  
+
+
+---
+
+### 🧪 Commands Used  
+
+- `git clone ssh://bandit28-git@bandit.labs.overthewire.org:2220/home/bandit28-git/repo`  
+- `cd repo`  
+- `cat README.md`  
+- `git log -p`  
+
+
+---
+
+### 🧩 Command Purpose  
+
+| Command | Purpose |
+|--------|--------|
+| `git clone` | Downloads the private repository |
+| `git log -p` | Shows commit history with file changes |
+| `cat README.md` | Displays the current file version |
+
+
+---
+
+### 📸 Screenshot Evidence  
+
+![Bandit Level 28 – Repository](screenshots/level28_1.png)
+
+![Bandit Level 28 – Commit History](screenshots/level28_2.png)
+
+
+---
+
+### 🔑 Next Level Password  
+
+```
+4pT1t5DENAyuqnvaYds10e4QLCdjmJ7
+```
+
+
+---
+
+### 🧠 Explanation  
+
+- Git stores all previous versions of files  
+- The password was removed from the latest version  
+- Viewing earlier commits reveals the original content  
+- The original file contains the password for the next level  
+
+
+---
+
+### 🔐 Concept Learned  
+
+This level demonstrates how deleted data can still exist in Git history.  
+It shows why sensitive data should never be committed to version control.
+
+
+---
+
+### 🛡️ Security Insight  
+
+Secrets must be removed using history rewriting tools.  
+Simply deleting them from the latest commit is not sufficient.
