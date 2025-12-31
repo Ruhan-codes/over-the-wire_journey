@@ -1,78 +1,108 @@
-======================================
-🎯 OBJECTIVE
-======================================
-Find the hidden password for bandit31 by analyzing the
-bandit30 Git repository. The repository looks empty,
-but the password is secretly stored in a Git object.
+## Bandit Level 30 → Level 31
 
 
+### 🎯 Objective  
 
-======================================
-🔐 CREDENTIALS PROVIDED
-======================================
-👤 Username: bandit30  
-🔑 Password: (password from previous level)  
-🌐 Repo: ssh://bandit30-git@bandit.labs.overthewire.org:2220/home/bandit30-git/repo
-
+- Log in as `bandit30-git`  
+- Explore Git references  
+- Identify the hidden tag  
+- Retrieve the password for the next level  
 
 
-======================================
-🛠️ METHOD TO SOLVE
-======================================
-1️⃣ Clone the git repository  
-2️⃣ Enter the repo directory  
-3️⃣ Check git tags to locate hidden content  
-4️⃣ Investigate the secret tag  
-5️⃣ Display tag contents to reveal the password  
-6️⃣ Use password to log into next level 🎉
+---
+
+### 🧭 Quick Action Summary  
+
+- Clone the private repository  
+- List all Git tags  
+- Inspect the hidden tag  
+- Extract the password  
 
 
+---
 
-======================================
-💻 COMMANDS USED
-======================================
-git clone ssh://bandit30-git@bandit.labs.overthewire.org:2220/home/bandit30-git/repo
-cd repo
-git tag
-git show-ref --tags
-git show secret
+### 🔑 Credentials Provided  
+
+- **Username:** bandit30-git  
+- **Password:** qp3oEX3VLz5MDG1n91YowTv4Q8I7CDZL  
 
 
+---
 
-======================================
-📜 EXPLANATION
-======================================
-When cloning the repository, it appears empty,
-but Git can store data not only in files but also
-inside metadata such as tags.
+### 🔍 Method of Solve  
 
-Using:
-git tag
-we discover a hidden tag called:
-secret
+The password is not stored in the repository files or branches.  
+Instead, it is hidden inside a Git tag, which must be inspected to retrieve the data.
 
-Then with:
-git show secret
-we print the contents of that tag,
-and inside it is the password for the next level.
-
-So even though nothing visible exists in the repo,
-Git secretly keeps the password stored in tag data.
-💡 Important takeaway: Git history and objects
-can still hold sensitive information even when not visible!
+Steps followed:  
+- Clone the repository  
+- List available tags  
+- View the tag content  
+- Read the password  
 
 
+---
 
-======================================
-📚 CONCEPTS LEARNED
-======================================
-🧠 Hidden data in Git repositories  
-🏷️ Understanding & reading Git tags  
-🔎 Using git show & show-ref to extract hidden content  
-⚠️ Security Awareness: “Deleting” from Git doesn’t mean gone
+### 🧪 Commands Used  
+
+- `git clone ssh://bandit30-git@bandit.labs.overthewire.org:2220/home/bandit30-git/repo`  
+- `cd repo`  
+- `cat README.md`  
+- `git tag`  
+- `git show-ref --tags`  
+- `git show secret`  
 
 
+---
 
-======================================
-✔️ DONE — PASSWORD FOUND 🎉
-======================================
+### 🧩 Command Purpose  
+
+| Command | Purpose |
+|--------|--------|
+| `git tag` | Lists all tags |
+| `git show secret` | Displays the data stored inside the tag |
+
+
+---
+
+### 📸 Screenshot Evidence  
+
+**Cloning the Repository and Checking Files**  
+![Bandit Level 30 – Repository](screenshots/level30_1.png)
+
+**Viewing the Hidden Git Tag That Contains the Password**  
+![Bandit Level 30 – Git Tag](screenshots/level30_2.png)
+
+
+---
+
+### 🔑 Next Level Password  
+
+```
+fb5S2xb7bRyFmAvQYQGegsbvYJqhdNy
+```
+
+
+---
+
+### 🧠 Explanation  
+
+- The repository files do not contain the password  
+- A hidden Git tag stores the password  
+- Inspecting the tag reveals the next level credentials  
+
+
+---
+
+### 🔐 Concept Learned  
+
+This level shows that Git tags can contain hidden information.  
+It highlights the importance of inspecting all Git references during security reviews.
+
+
+---
+
+### 🛡️ Security Insight  
+
+Sensitive data should never be stored in Git tags.  
+Tags are easily accessible and can expose confidential information.
